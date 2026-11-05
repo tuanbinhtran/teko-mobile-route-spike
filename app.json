@@ -1,0 +1,41 @@
+{
+  "expo": {
+    "name": "PawTrackRoute",
+    "slug": "teko-mobile-route-spike",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "ch.teko.pawtrack.routespike"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-location",
+        {
+          "isIosBackgroundLocationEnabled": true,
+          "locationWhenInUsePermission": "PawTrack zeichnet die Route deines Spaziergangs auf, solange die App geöffnet ist.",
+          "locationAlwaysAndWhenInUsePermission": "PawTrack zeichnet die Route deines Spaziergangs auch bei gesperrtem Bildschirm auf. Die Daten bleiben auf deinem Gerät.",
+          "locationAlwaysPermission": "PawTrack zeichnet die Route deines Spaziergangs auch bei gesperrtem Bildschirm auf. Die Daten bleiben auf deinem Gerät.",
+          "motionUsagePermission": "PawTrack verwendet keine Bewegungsdaten.",
+          "locationFullAccuracyPermission": "Für eine genaue Route braucht PawTrack deinen genauen Standort."
+        }
+      ],
+      "expo-sharing",
+      "expo-status-bar"
+    ]
+  }
+}
