@@ -77,7 +77,7 @@ Ablauf pro Test:
 
 ## Annahmen (nicht verifiziert)
 
-- Dass der CI-Build durchläuft, ist bisher nicht beobachtet; lokal geprüft sind nur `tsc`, `expo-doctor`, `expo export --platform ios` und `expo prebuild -p ios` (Info.plist enthält `UIBackgroundModes: location`).
+- Der CI-Build ist am 05.11.2026 durchgelaufen (Xcode 26.6, `main.jsbundle` eingebettet, `UIBackgroundModes` mit `location`). Ob das IPA in LiveContainer startet, ist noch nicht geprüft.
 - Dass iOS eine Gast-App in LiveContainer im Hintergrund weiterlaufen lässt, ist die Hypothese von Test A. Grundlage: Das Info.plist von LiveContainer deklariert `location` in `UIBackgroundModes`.
 - Wird die App beendet (durch dich oder durch iOS), stoppt laut Expo-Doku die Hintergrund-Aufzeichnung. Beim nächsten Öffnen läuft die Aufnahme weiter, wenn der Task noch registriert ist; sonst wird sie beendet und als Fehler gemeldet. Die Zeit dazwischen erscheint als Lücke.
 
