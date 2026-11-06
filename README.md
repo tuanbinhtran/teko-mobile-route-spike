@@ -75,11 +75,20 @@ Ablauf pro Test:
 5. Entsperren, **Stopp**, Ergebnis ansehen (Zeile «Kriterien Test A»), **JSON exportieren**.
 6. C: Berechtigung in den Einstellungen ändern, zurück in die App; die Statuszeile aktualisiert sich ohne Aufnahme. Danach **Start** tippen.
 
-## Annahmen (nicht verifiziert)
+## Ergebnisse
 
-- Dass der CI-Build durchläuft, ist bisher nicht beobachtet; lokal geprüft sind nur `tsc`, `expo-doctor`, `expo export --platform ios` und `expo prebuild -p ios` (Info.plist enthält `UIBackgroundModes: location`).
-- Dass iOS eine Gast-App in LiveContainer im Hintergrund weiterlaufen lässt, ist die Hypothese von Test A. Grundlage: Das Info.plist von LiveContainer deklariert `location` in `UIBackgroundModes`.
-- Wird die App beendet (durch dich oder durch iOS), stoppt laut Expo-Doku die Hintergrund-Aufzeichnung. Beim nächsten Öffnen läuft die Aufnahme weiter, wenn der Task noch registriert ist; sonst wird sie beendet und als Fehler gemeldet. Die Zeit dazwischen erscheint als Lücke.
+| Test | Datum | Ergebnis |
+|---|---|---|
+| A – Hintergrund | 06.11.2026 | **Inhaltlich bestanden.** IPA in LiveContainer, Genauer Standort, «Immer», iPhone gesperrt: 32,6 Minuten, 866 m, 90 Punkte, keine Task-Fehler, Median-Genauigkeit 3,8 m (schlechtester Punkt 36 m), Akku 55 % → 55 %. Fünf Lücken von 69–122 s; der nächste Punkt lag jeweils nur 10–12 m entfernt (= Distanzfilter), es waren also Stopps des Hundes, keine Aussetzer. Das Kriterium «keine Lücke > 60 s» ist dadurch formal verfehlt; es unterscheidet Stehen nicht von Aussetzern. |
+| B – Vordergrund | – | offen |
+| C – Rückfall | – | offen |
+
+Erkenntnisse: Die Aufzeichnung bei gesperrtem Bildschirm funktioniert als Gast-App in LiveContainer. Eine Lücke mit kurzem Abstand zum nächsten Punkt ist ein Stopp; eine Lücke mit grossem Abstand wäre ein Aussetzer. Der Akkuwert ist vermutlich zu grob, weil iOS den Ladestand in 5-%-Schritten meldet.
+
+## Annahmen
+
+- Der CI-Build ist am 05.11.2026 durchgelaufen (Xcode 26.6, `main.jsbundle` eingebettet, `UIBackgroundModes` mit `location`); das IPA startet in LiveContainer und zeichnet im Hintergrund auf (Test A).
+- Wird die App beendet (durch dich oder durch iOS), stoppt laut Expo-Doku die Hintergrund-Aufzeichnung. Beim nächsten Öffnen läuft die Aufnahme weiter, wenn der Task noch registriert ist; sonst wird sie beendet und als Fehler gemeldet. Die Zeit dazwischen erscheint als Lücke. Nicht geprüft.
 
 ## Aufbau
 
